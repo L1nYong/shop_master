@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="dao.ProductMapper" >
+<mapper namespace="dao.ProductDao" >
   <resultMap id="BaseResultMap" type="entity.Product" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="pro_number" property="proNumber" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="DECIMAL" />
     <result column="imgUrl" property="imgurl" jdbcType="VARCHAR" />
-    <result column="addtime" property="addtime" jdbcType="INTEGER" />
+    <result column="addtime" property="addtime" jdbcType="TIMESTAMP" />
     <result column="num" property="num" jdbcType="INTEGER" />
-    <result column="del" property="del" jdbcType="TINYINT" />
+    <result column="del" property="del" jdbcType="INTEGER" />
     <result column="company" property="company" jdbcType="CHAR" />
+  </resultMap>
+  
+  <resultMap id="PartResultMap" type="java.util.HashMap" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="pro_number" property="proNumber" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="imgUrl" property="imgurl" jdbcType="VARCHAR" />
+    <result column="num" property="num" jdbcType="INTEGER" />   
   </resultMap>
   <sql id="Base_Column_List" >
     id, name, pro_number, price, imgUrl, addtime, num, del, company
@@ -30,8 +39,8 @@
       price, imgUrl, addtime, 
       num, del, company)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{proNumber,jdbcType=VARCHAR}, 
-      #{price,jdbcType=DECIMAL}, #{imgurl,jdbcType=VARCHAR}, #{addtime,jdbcType=INTEGER}, 
-      #{num,jdbcType=INTEGER}, #{del,jdbcType=TINYINT}, #{company,jdbcType=CHAR})
+      #{price,jdbcType=DECIMAL}, #{imgurl,jdbcType=VARCHAR}, #{addtime,jdbcType=TIMESTAMP}, 
+      #{num,jdbcType=INTEGER}, #{del,jdbcType=INTEGER}, #{company,jdbcType=CHAR})
   </insert>
   <insert id="insertSelective" parameterType="entity.Product" >
     insert into product
@@ -81,13 +90,13 @@
         #{imgurl,jdbcType=VARCHAR},
       </if>
       <if test="addtime != null" >
-        #{addtime,jdbcType=INTEGER},
+        #{addtime,jdbcType=TIMESTAMP},
       </if>
       <if test="num != null" >
         #{num,jdbcType=INTEGER},
       </if>
       <if test="del != null" >
-        #{del,jdbcType=TINYINT},
+        #{del,jdbcType=INTEGER},
       </if>
       <if test="company != null" >
         #{company,jdbcType=CHAR},
@@ -110,13 +119,13 @@
         imgUrl = #{imgurl,jdbcType=VARCHAR},
       </if>
       <if test="addtime != null" >
-        addtime = #{addtime,jdbcType=INTEGER},
+        addtime = #{addtime,jdbcType=TIMESTAMP},
       </if>
       <if test="num != null" >
         num = #{num,jdbcType=INTEGER},
       </if>
       <if test="del != null" >
-        del = #{del,jdbcType=TINYINT},
+        del = #{del,jdbcType=INTEGER},
       </if>
       <if test="company != null" >
         company = #{company,jdbcType=CHAR},
@@ -130,10 +139,13 @@
       pro_number = #{proNumber,jdbcType=VARCHAR},
       price = #{price,jdbcType=DECIMAL},
       imgUrl = #{imgurl,jdbcType=VARCHAR},
-      addtime = #{addtime,jdbcType=INTEGER},
+      addtime = #{addtime,jdbcType=TIMESTAMP},
       num = #{num,jdbcType=INTEGER},
-      del = #{del,jdbcType=TINYINT},
+      del = #{del,jdbcType=INTEGER},
       company = #{company,jdbcType=CHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getAll" resultMap="PartResultMap">
+  	select id, name, pro_number, price, imgUrl, num from product
+  </select>
 </mapper>

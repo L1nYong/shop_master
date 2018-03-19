@@ -1,5 +1,7 @@
 package entity;
 
+import java.util.Date;
+
 public class Product {
     private Integer id;
 
@@ -11,11 +13,11 @@ public class Product {
 
     private String imgurl;
 
-    private Integer addtime;
+    private Date addtime;
 
     private Integer num;
 
-    private int del;
+    private Integer del;
 
     private String company;
 
@@ -59,11 +61,11 @@ public class Product {
         this.imgurl = imgurl == null ? null : imgurl.trim();
     }
 
-    public Integer getAddtime() {
+    public Date getAddtime() {
         return addtime;
     }
 
-    public void setAddtime(Integer addtime) {
+    public void setAddtime(Date addtime) {
         this.addtime = addtime;
     }
 
@@ -75,11 +77,11 @@ public class Product {
         this.num = num;
     }
 
-    public int getDel() {
+    public Integer getDel() {
         return del;
     }
 
-    public void setDel(int del) {
+    public void setDel(Integer del) {
         this.del = del;
     }
 

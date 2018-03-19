@@ -1,5 +1,8 @@
 package dao;
 
+import java.util.List;
+import java.util.Map;
+
 import entity.Product;
 
 public interface ProductDao {
@@ -14,4 +17,6 @@ public interface ProductDao {
     int updateByPrimaryKeySelective(Product record);
 
     int updateByPrimaryKey(Product record);
+    
+    List<Map<String, Object>> getAll();
 }
